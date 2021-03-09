@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Scandi Sails</title>
+       
+        <link rel ="stylesheetTimetable" href="timetablepage.component.scss">
+       
+
+    </head>
+    <body>
+            <!-- <ejs-calendar id=calendar [value]='value' [min]='minDate' [max]='maxDate'></ejs-calendar> -->
+
+            <!--Link tilbage til forsiden-->
+            <h2><a routerLink =" " routerLinkActive="active">Scandi Sails</a></h2>
+            
+
+            
+            <div [hidden]="submitted">
+                    <h1>Book a tour</h1> 
+            <div class="container-flow">
+                    <form #timepick="ngForm" (ngSubmit)="onSubmit()">
+                    
+
+             <!--validere navn & email input og skaber input forms-->           
+        <div class="cross-validation" [class.cross-validation-error]="timepick.errors && (timepick.touched || timepick.dirty)">
+                            <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="Navn"  
+                                    required  [(ngModel)]="booking.Navn" #Navn="ngModel"> 
+                                    
+                                     <div *ngIf="Navn.invalid && (Navn.dirty || Navn.touched)"
+                                    class="alert alert-danger"> 
+     
+                                     <div *ngIf="Navn.errors.required ">
+                                            Name is required
+                                    </div>
+</div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" class="form-control" name="Email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" 
+                                        [(ngModel)]="booking.Email" #Email="ngModel">
+                                        
+                                        <div *ngIf="Email.invalid && (Email.dirty || Email.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="Email.errors.required">
+                                            Email is required
+                                        </div>
+                                    <div *ngIf="Email.errors.pattern">
+                                        Email is invalid
+                                    </div>
+                                    </div>
+                                    </div>
+
+                        <!--skaber tidspunkt radio button og validere den-->
+                            <div class="form-group">
+                                <label>Time Preference</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" class="formcontrol" required [(ngModel)]="dateTime.timepreference" #timepreference="ngModel" type="radio" name="timePreference" value="Morning" >
+                                       
+                                    <label class="form-check-label">Morning (9 AM -12 PM)</label>
+                                    <div *ngIf="timepreference.invalid && (timepreference.dirty || timepreference.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="timepreference.errors.required"></div>
+
+                                </div> 
+                                    
+                                    
+                                </div> 
+                                <div class="form-check">
+                                    <input class="form-check-input" required [(ngModel)]="dateTime.timepreference" #timepreference="ngModel" type="radio" name="timePreference" value="Afternoon">
+                                    <label class="form-check-label">Afternoon (02 pm - 5 PM)</label>
+                                    <div *ngIf="timepreference.invalid && (timepreference.dirty || timepreference.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="timepreference.errors.required"></div>
+
+                                </div> 
+                                 
+                                    
+
+                                    
+                            </div> 
+                           
+                                
+                                               
+                            </div>
+                            </div>
+<!--submit knappen og kan kun bruges når dataen er valideret korrekt-->
+                            <button type="submit"  style="text-decoration: none;" routerLinkActive="active" class="btn" [disabled]="timepick.invalid" >Submit</button>
+</div>
+<!--kalenderen-->
+<div class="control-section">
+        <div id="control_wrapper">
+            <div id="container" style="overflow:auto">
+                <ejs-calendar (change)="onValueChange($event)"></ejs-calendar>
+                <span id="selected">Selected Value: </span>
+            </div>
+        </div>
+    </div>
+
+              </form>  
+            </div>
+            </div>
+            <!--tak siden som kommer op når man har submit dataen-->
+            <div [hidden]="!submitted">
+                    <h2 class="thankyou">Thank you!</h2>
+                    <div class="row">
+                            <div>Name:</div>
+                            <div >{{booking.Navn}}</div>
+                            <div>Email:</div>
+                            <div>{{booking.Email}}</div>
+                            <div>Tid:</div>
+                            <div>{{dateTime.timepreference}}</div>
+
+                    
+                    </div>
+            </div>
+           <!--Calendar-->
+        
+           
+        <!-- <ejs-calendar id=calendar [value]='value' [min]='minDate' [max]='maxDate'></ejs-calendar>    -->
+                
+                <!--routerLink ="/tour/timeofday"-->
+               
+               <!--next button til UI siden-->
+            
+            <router-outlet></router-outlet> 
+    </body>
+    </html>

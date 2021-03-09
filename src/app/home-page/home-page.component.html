@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scandi Sails</title>
+        
+        <link rel="stylesheetHome" type="text/css" href="home-page.component.scss">
+        
+    </head>
+<body>
+    
+         <h2>Scandi Sails</h2>
+         <ul>
+            
+                <li><a routerLink ="tour" routerLinkActive="active">Tour</a></li>
+                <!--Knap til tour-->
+                <li><a href="#Learnmore">Learn more</a></li>
+                <li><a href="#Products">Products</a></li>
+                <li><a href="#Pricing">Pricing</a></li>
+                <li><a href="#Contact">Contact</a></li>
+                    
+            </ul>
+  
+    <!--
+        
+        -Knapper ovenfor
+        
+    -->
+    
+    <h1>Feel the wind in your face</h1>
+       <!-- <p>Explore the sea</p> -->
+       <!--Reklametag ovenfor-->
+
+        <button type="button" routerLink ="tour" routerLinkActive="active" class="button">Tour at the sea</button>
+       <!--Knap til tour-->
+              
+       <!--Flex containers som forklarer hvad produkten er-->
+        <div class="flex-containerHead">
+            <div>A tour at the sea</div>
+            <div>Learn more</div>
+            <div>Try yourself</div>
+            
+        </div>
+        <div class="flex-containerText">
+            <div>Get a tour on the water, where unexpected things might happen</div>
+            <div>Learn more about sailing on your own</div>
+            <div>Buy sailing equipment to try sailing on your own</div>
+        </div>
+
+
+        <!--Routing. Skal findes på enhver html file hvis der skal routing navigation-->
+<router-outlet></router-outlet>    
+</body>
+</html>
+
+
